@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mod Menu</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background: #121212;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #login-container, #menu-container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 300px;
+            background: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .menu-item {
+            margin: 10px 0;
+            padding: 10px;
+            background: #282828;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .menu-item:hover {
+            background: #505050;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="login-container">
+        <h1>Login to Access Menu</h1>
+        <input type="text" id="key-input" placeholder="Enter Key">
+        <button id="login-btn">Login</button>
+        <p id="login-status"></p>
+    </div>
+
+    <!-- Menu Section -->
+    <div id="menu-container" class="hidden">
+        <h1>Mod Menu</h1>
+        <div class="menu-item" id="switch-btn">Switch Function</div>
+        <div class="menu-item" id="particles-btn">Particles Effect</div>
+        <div class="menu-item" id="color-btn">Color Light Effect</div>
+        <div class="menu-item" id="feature-4-btn">Feature 4</div>
+        <div class="menu-item" id="feature-5-btn">Feature 5</div>
+    </div>
+
+    <script>
+        // KeyAuth Simulation
+        const VALID_KEY = "12345"; // Replace this with real KeyAuth verification logic.
+
+        const loginBtn = document.getElementById("login-btn");
+        const keyInput = document.getElementById("key-input");
+        const loginStatus = document.getElementById("login-status");
+        const loginContainer = document.getElementById("login-container");
+        const menuContainer = document.getElementById("menu-container");
+
+        loginBtn.addEventListener("click", () => {
+            const enteredKey = keyInput.value;
+            if (enteredKey === VALID_KEY) {
+                loginStatus.textContent = "Login successful!";
+                loginStatus.style.color = "green";
+                setTimeout(() => {
+                    loginContainer.classList.add("hidden");
+                    menuContainer.classList.remove("hidden");
+                }, 1000);
+            } else {
+                loginStatus.textContent = "Invalid key. Try again.";
+                loginStatus.style.color = "red";
+            }
+        });
+
+        // Menu Functions
+        const menuItems = document.querySelectorAll(".menu-item");
+        menuItems.forEach(item => {
+            item.addEventListener("click", () => {
+                const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+                item.style.background = randomColor;
+                item.style.color = "#000";
+            });
+        });
+    </script>
+</body>
+</html>
